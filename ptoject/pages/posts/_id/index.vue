@@ -4,9 +4,10 @@
       <div class="blog_post" v-if="post">
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
-        {{post.userId}}
       </div>Автор:
-      <b>{{ user[0].username }}</b>
+      <NuxtLink :to="{ path: '/userpost/'+post.userId }">
+        <b>{{ user[0].username }}</b>
+      </NuxtLink>
       <div class="comments">
         <h2>Комментарии: ({{comments.length}})</h2>
 
@@ -20,30 +21,26 @@
   </div>
 </template>
 <script>
-import { Store } from "vuex";
+import { Store, mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      query: ""
-    };
-  },
-  async asyncData({ store, params }) {
+  async asyncData({ store, params, query }) {
     await store.dispatch("getPosts");
-    await store.dispatch("getUser", 1);
+    await store.dispatch("getUser", query.userId);
     await store.dispatch("getComment", params.id);
     return {
       post: store.getters.posts,
       comments: store.getters.comments,
       user: store.getters.user,
-      post_userID: []
+      post_userID: store.getters.id
     };
   },
 
   created: function() {
-    var postId = this.$route.params.id;
+    let postId = this.$route.params.id;
     this.post = this.post[postId - 1];
     var post_userID = this.post.userId;
+
     console.log(this.post.userId);
   }
 };

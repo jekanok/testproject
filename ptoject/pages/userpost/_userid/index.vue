@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
-      <h2>Записи пользователя:</h2>
+      <h2>Записи пользователя: {{user[0].username}}</h2>
       <div class="conteiner" v-for="(user, index) in users " :key="index">
         <h3>{{user.title}}</h3>
         <span>{{user.body}}</span>
@@ -12,10 +12,12 @@
 
 <script>
 export default {
-  async asyncData({ store }) {
-    await store.dispatch("getUsers", 2);
+  async asyncData({ store, params }) {
+    await store.dispatch("getUsers", params.userid);
+    await store.dispatch("getUser", params.userid);
     return {
-      users: store.getters.users
+      users: store.getters.users,
+      user: store.getters.user
     };
   }
 };

@@ -7,7 +7,8 @@ const CreateStore = () => {
       posts: [],
       comments: [],
       users: [],
-      user: []
+      user: [],
+      id: 1
     },
     getters: {
       posts(state) {
