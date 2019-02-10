@@ -1,5 +1,6 @@
 import Vuex, { Store } from "vuex";
 import Axios from "axios";
+import Uimini from "uimini/dist/css/uimini.css";
 
 const CreateStore = () => {
   return new Vuex.Store({

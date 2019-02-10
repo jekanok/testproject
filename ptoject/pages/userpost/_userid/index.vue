@@ -1,11 +1,9 @@
 <template>
   <div>
-    <div class="wrapper">
-      <h2>Записи пользователя: {{user[0].username}}</h2>
-      <div class="conteiner" v-for="(user, index) in users " :key="index">
-        <h3>{{user.title}}</h3>
-        <span>{{user.body}}</span>
-      </div>
+    <h2 class="ui-title-4">Посты пользователя: {{user[0].username}}</h2>
+    <div v-for="(user, index) in users " :key="index">
+      <h3 class="ui-title-3">{{user.title}}</h3>
+      <p class="ui-text-regular">{{user.body}}</p>
     </div>
   </div>
 </template>
@@ -24,18 +22,13 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  width: 900px;
-  margin: auto;
-}
-.conteiner {
-  padding: 10px;
-  border-bottom: 1px solid #cccc;
-}
-.conteiner a,
-h2 {
-  text-decoration: none;
+.ui-title-4,
+.ui-title-3 {
   color: cadetblue;
-  font-weight: 300;
+  text-transform: uppercase;
+}
+.ui-text-regular {
+  border-bottom: 1px solid #cccc;
+  padding: 10px 0;
 }
 </style>

@@ -1,21 +1,22 @@
 <template>
   <div>
-    <div class="wrapper">
-      <div class="blog_post" v-if="post">
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.body }}</p>
-      </div>Автор:
-      <NuxtLink :to="{ path: '/userpost/'+post.userId }">
-        <b>{{ user[0].username }}</b>
-      </NuxtLink>
-      <div class="comments">
-        <h2>Комментарии: ({{comments.length}})</h2>
+    <div class="blog_post" v-if="post">
+      <h2 class="ui-title-4">{{ post.title }}</h2>
+      <p>{{ post.body }}</p>
+    </div>Автор:
+    <NuxtLink :to="{ path: '/userpost/'+post.userId }">
+      <b v-if="this.$route.query.userId == post.userId">{{ user[0].username }}</b>
+      <b v-else>Автор не совпадает!</b>
+    </NuxtLink>
+    <div class="comments">
+      <h2>Комментарии: ({{comments.length}})</h2>
 
-        <div class="comment_item" v-for="(comment, index) in comments" :key="index">
-          <h3>{{comment.name}}</h3>
-          <span>{{comment.email}}</span>
-          <p>{{comment.body}}</p>
-        </div>
+      <div class="comment_item" v-for="(comment, index) in comments" :key="index">
+        <h3>
+          <b>{{comment.name}}</b>
+        </h3>
+        <span>{{comment.email}}</span>
+        <p>{{comment.body}}</p>
       </div>
     </div>
   </div>
@@ -40,8 +41,6 @@ export default {
     let postId = this.$route.params.id;
     this.post = this.post[postId - 1];
     var post_userID = this.post.userId;
-
-    console.log(this.post.userId);
   }
 };
 </script>

@@ -1,15 +1,13 @@
 <template>
   <div>
-    <div class="wrapper">
-      <div class="conteiner" v-for="post in posts " :key="post.id">
-        <NuxtLink :to="{ path: '/posts/'+ post.id, query: { userId: post.userId }}">
-          <h2>{{post.title}}</h2>
-        </NuxtLink>
-        <p>{{post.body}}</p>
-        <!-- <NuxtLink :to="{ path: '/userpost/'+post.userId }">
-          <span v-if="user[post.id">{{user[0].username}}</span>
-        </NuxtLink>-->
-      </div>
+    <div class="post" v-for="post in posts " :key="post.id">
+      <NuxtLink :to="{ path: '/posts/'+ post.id, query: { userId: post.userId }}">
+        <h2 class="ui-title-4">{{post.title}}</h2>
+      </NuxtLink>
+      <p class="ui-text-regular">{{post.body}}</p>
+      <NuxtLink :to="{ path: '/userpost/'+post.userId }">
+        <span>{{ user[post.userId -1].username }}</span>
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -24,25 +22,13 @@ export default {
       user: store.getters.user
     };
   },
-  created: function() {
-    console.log(1);
-  }
+  created: function() {}
 };
 </script>
 
 <style scoped>
-.wrapper {
-  width: 900px;
-  margin: auto;
-}
-.conteiner {
-  padding: 10px;
-  border-bottom: 1px solid #cccc;
-}
-.conteiner a,
-h2 {
-  text-decoration: none;
+.ui-title-4 {
   color: cadetblue;
-  font-weight: 300;
+  text-transform: uppercase;
 }
 </style>
