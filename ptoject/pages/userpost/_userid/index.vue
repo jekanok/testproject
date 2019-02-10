@@ -2,7 +2,10 @@
   <div>
     <h2 class="ui-title-4">Посты пользователя: {{user[0].username}}</h2>
     <div v-for="(user, index) in users " :key="index">
-      <h3 class="ui-title-3">{{user.title}}</h3>
+      <NuxtLink :to="{ path: '/posts/'+ user.id, query: { userId: user.userId }}">
+        <h3 class="ui-title-3">{{user.title}}</h3>
+      </NuxtLink>
+
       <p class="ui-text-regular">{{user.body}}</p>
     </div>
   </div>
